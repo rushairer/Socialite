@@ -6,7 +6,7 @@ public protocol HasAccessToken {
 
 public typealias AccessTokenable = Hashable & HasAccessToken
 
-public enum AuthState<Success: AccessTokenable>: Equatable {
+public enum AuthState<Success>: Equatable where Success: AccessTokenable {
     case initialize
     case loading
     case authorized(Success)
