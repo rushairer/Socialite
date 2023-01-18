@@ -70,13 +70,13 @@ public class SocialiteApple: Socialite, ObservableObject {
                 let success = try decoder.decode(SocialiteAppleSuccess.self, from: data)
                 
                 if let error = success.error {
-                    self.state = .error(.customError(errorString: error))
+                    self.state = .error(.customError(error))
                 } else {
                     self.state = .authorized(success)
                 }
                 
             } catch {
-                self.state = .error(.customError(errorString: error.localizedDescription))
+                self.state = .error(.customError(error.localizedDescription))
             }
         }
     }

@@ -14,8 +14,20 @@ public enum AuthState<Success>: Equatable where Success: AccessTokenable {
     case error(AuthStateError)
 }
 
-public enum AuthStateError: Error, Hashable {
+public enum AuthStateError: Error, Hashable, Identifiable {
+    public var id: String { localizedDescription }
+    
     case invalidAuthorization
     case invalidAuthorizationCode
-    case customError(errorString: String)
+    case customError(_ errorString: String)
+}
+
+extension AuthStateError: LocalizedError {
+    public var AuthStateError: String {
+        switch self {
+        case .invalidAuthorization: return "Invalid Authorization."
+        case .invalidAuthorizationCode: return "Invalid Authorization Code."
+        case .customError(let errorString): return errorString
+        }
+    }
 }
